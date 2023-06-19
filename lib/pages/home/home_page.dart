@@ -4,14 +4,15 @@ import 'package:school/pages/home/abas/afazes_tab.dart';
 import 'package:school/pages/home/abas/perfil_tab.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key:key);
 
   @override
-  State createState() => _HomePage();
+  State createState() => _HomePageState();
 }
 
-class _HomePage extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   late int abaSelecionada;
+  
   final List<BottomNavigationBarItem> _abas = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     const BottomNavigationBarItem(
@@ -19,12 +20,7 @@ class _HomePage extends State<HomePage> {
   ];
 
   final List<Widget> _conteudos = [
-    AfazeresTab(
-      valorInicial: 0,
-      callback: (tabIndex) {
-        print(tabIndex);
-      },
-    ),
+    const AfazeresTab(),
     const PerfilTab(),
   ];
 
@@ -46,9 +42,9 @@ class _HomePage extends State<HomePage> {
       appBar: const AppBarComponent(),
       body: _conteudos.elementAt(abaSelecionada),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: handleTab,
         currentIndex: abaSelecionada,
         items: _abas,
+        onTap: handleTab,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
