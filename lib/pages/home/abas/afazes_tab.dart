@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/components/item_widget.dart';
 import '../../../components/spacer_component.dart';
 import '../../../components/icon_button_component.dart';
 import '../../../entities/afazer_entity.dart';
@@ -60,7 +61,7 @@ class _AfazeresTab extends State<AfazeresTab> {
     super.initState();
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -75,6 +76,7 @@ class _AfazeresTab extends State<AfazeresTab> {
             itemCount: _listaAfazeres.length,
             itemBuilder: (context, index) {
               final item = _listaAfazeres.elementAt(index);
+
               return Dismissible(
                 key: Key(item.uuid),
                 onDismissed: (direction) {
@@ -82,12 +84,11 @@ class _AfazeresTab extends State<AfazeresTab> {
                     handleExcluir(index);
                   }
                 },
-                child: Text(item.titulo),
+                child: ItemWidget(item: item,),
               );
             },
           ),
-        ),
-        const SpacerComponent(),
+        )
       ],
     );
   }
