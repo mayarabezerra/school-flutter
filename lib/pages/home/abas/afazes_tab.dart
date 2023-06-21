@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school/components/item_widget.dart';
-import '../../../components/spacer_component.dart';
-import '../../../components/icon_button_component.dart';
+import 'package:school/pages/components/item_widget.dart';
+import 'package:school/pages/components/novo_item_widget.dart';
 import '../../../entities/afazer_entity.dart';
 
 class AfazeresTab extends StatefulWidget {
@@ -17,19 +16,22 @@ class _AfazeresTab extends State<AfazeresTab> {
   late List<AfazerEntity> _listaAfazeres;
 
   void handleAdicionar() {
-    final item = AfazerEntity(
-      uuid: 'teste3',
-      titulo: 'Teste 3',
-      dataInicio: DateTime.now(),
-      dataFim: DateTime.now(),
-      isConcluido: false,
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          contentPadding: const EdgeInsets.all(16),
+          children: [
+            NovoItemWidget(callback: (item) {
+              _listaAfazeres.add(item);
+              setState(() {
+                _listaAfazeres = _listaAfazeres;
+              });
+            }),
+          ],
+        );
+      },
     );
-
-    _listaAfazeres.add(item);
-
-    setState(() {
-      _listaAfazeres = _listaAfazeres;
-    });
   }
 
   void handleExcluir(int index) {
@@ -84,7 +86,9 @@ class _AfazeresTab extends State<AfazeresTab> {
                     handleExcluir(index);
                   }
                 },
-                child: ItemWidget(item: item,),
+                child: ItemWidget(item: item, onPressed: () {
+                  handleAdicionar();
+                },),
               );
             },
           ),

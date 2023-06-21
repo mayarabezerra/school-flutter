@@ -5,7 +5,10 @@ import 'package:school/entities/afazer_entity.dart';
 
 class ItemWidget extends StatelessWidget {
   final AfazerEntity item;
-  const ItemWidget({super.key, required this.item});
+  final Function() onPressed;
+
+
+  const ItemWidget({super.key, required this.item, required this.onPressed});
 
   Widget status() {
     final icon = item.isConcluido == true ? Icons.done_all : Icons.done;
@@ -38,7 +41,7 @@ class ItemWidget extends StatelessWidget {
             const SpacerComponent(isFull: true),
             IconButtonComponent(
               icon: Icons.arrow_forward_ios,
-              onPressed: () {},
+              onPressed: onPressed,
             ),
           ]),
         ),
